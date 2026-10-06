@@ -73,10 +73,10 @@ export const RegisterPage: React.FC = () => {
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 mb-4 group">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-emerald-400 flex items-center justify-center text-white font-extrabold text-xl shadow-lg">
-              P
+              F
             </div>
             <span className="font-extrabold text-2xl tracking-tight text-slate-900 dark:text-white">
-              PayFlow
+              FlexiPay
             </span>
           </Link>
           <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">

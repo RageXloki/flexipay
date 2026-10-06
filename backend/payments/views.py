@@ -310,7 +310,7 @@ class UPIManagementView(APIView):
         upi_accounts = UPIAccount.objects.filter(user=request.user)
         # Create default UPI ID if none exists
         if not upi_accounts.exists():
-            default_id = f"{request.user.email.split('@')[0]}@payflow"
+            default_id = f"{request.user.email.split('@')[0]}@flexipay"
             upi_obj, _ = UPIAccount.objects.get_or_create(
                 upi_id=default_id,
                 defaults={'user': request.user, 'is_primary': True}
@@ -327,10 +327,10 @@ class UPIManagementView(APIView):
         if not custom_handle or '@' in custom_handle:
             return Response({
                 "status": "error",
-                "message": "Provide a valid handle (alphanumeric only, without @payflow)."
+                "message": "Provide a valid handle (alphanumeric only, without @flexipay)."
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        full_upi = f"{custom_handle}@payflow"
+        full_upi = f"{custom_handle}@flexipay"
         if UPIAccount.objects.filter(upi_id=full_upi).exists():
             return Response({
                 "status": "error",
@@ -558,7 +558,7 @@ class QRVerifyView(APIView):
 
         return Response({
             "status": "success",
-            "type": "PAYFLOW_LINK",
+            "type": "FLEXIPAY_LINK",
             "raw": qr_data,
             "recipient_name": "Merchant / Test QR",
             "recipient_identifier": qr_data

@@ -46,10 +46,10 @@ export const ForgotPasswordPage: React.FC = () => {
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 mb-4 group">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-emerald-400 flex items-center justify-center text-white font-extrabold text-xl shadow-lg">
-              P
+              F
             </div>
             <span className="font-extrabold text-2xl tracking-tight text-slate-900 dark:text-white">
-              PayFlow
+              FlexiPay
             </span>
           </Link>
           <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
@@ -99,7 +99,7 @@ export const ForgotPasswordPage: React.FC = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="user@payflow.local"
+                    placeholder="user@flexipay.local"
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
                   />
                   <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />

@@ -108,7 +108,7 @@ export const SendMoneyPage: React.FC = () => {
           recipient: recipientIdentifier,
           amount: amount,
           payment_method: paymentMethod,
-          note: note || 'Transfer via PayFlow',
+          note: note || 'Transfer via FlexiPay',
           upi_pin: enteredPin,
         },
         {
@@ -158,7 +158,7 @@ export const SendMoneyPage: React.FC = () => {
           Send Money
         </h1>
         <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-          Instant P2P transfers via PayFlow Wallet, UPI Simulator, or Tokenized Cards
+          Instant P2P transfers via FlexiPay Wallet, UPI Simulator, or Tokenized Cards
         </p>
       </div>
 
@@ -189,7 +189,7 @@ export const SendMoneyPage: React.FC = () => {
                   setQuery(e.target.value);
                   setSelectedRecipient(null);
                 }}
-                placeholder="Search e.g. priya@payflow, +919876543219, or Elena"
+                placeholder="Search e.g. priya@flexipay, +919876543219, or Elena"
                 className="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
               />
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
@@ -321,7 +321,7 @@ export const SendMoneyPage: React.FC = () => {
                   <div>
                     <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                       <Wallet className="w-4 h-4 text-emerald-500" />
-                      PayFlow Wallet
+                      FlexiPay Wallet
                     </span>
                     <span className="text-[11px] text-slate-500">
                       Balance: ₹{wallet?.balance || '0.00'}

@@ -96,7 +96,7 @@ export const DashboardPage: React.FC = () => {
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-2">
             <span>Primary UPI:</span>
             <span className="font-mono font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-2 py-0.5 rounded">
-              {primaryUPI?.upi_id || `${user?.email.split('@')[0]}@payflow`}
+              {primaryUPI?.upi_id || `${user?.email.split('@')[0]}@flexipay`}
             </span>
           </p>
         </div>
@@ -129,7 +129,7 @@ export const DashboardPage: React.FC = () => {
             <div className="flex items-center justify-between text-indigo-200 text-xs font-medium">
               <span className="flex items-center gap-1.5">
                 <Wallet className="w-4 h-4 text-emerald-400" />
-                PayFlow Wallet Balance
+                FlexiPay Wallet Balance
               </span>
               <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">
                 ACTIVE

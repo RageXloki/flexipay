@@ -125,7 +125,7 @@ export const LandingPage: React.FC = () => {
             Architecture Designed for Trust
           </h3>
           <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
-            PayFlow demonstrates full-stack fintech principles: stateless authentication, atomic ledger balancing, PCI-compliant card tokenization, and educational fraud risk assessment.
+            FlexiPay demonstrates full-stack fintech principles: stateless authentication, atomic ledger balancing, PCI-compliant card tokenization, and educational fraud risk assessment.
           </p>
         </div>
 
@@ -137,7 +137,7 @@ export const LandingPage: React.FC = () => {
             </div>
             <h4 className="text-lg font-bold text-slate-900 dark:text-white">Simulated UPI Switch</h4>
             <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Create unique virtual payment addresses (e.g. <span className="font-mono text-indigo-500">alex@payflow</span>), generate dynamic QR codes, and simulate instant camera scanning payments.
+              Create unique virtual payment addresses (e.g. <span className="font-mono text-indigo-500">alex@flexipay</span>), generate dynamic QR codes, and simulate instant camera scanning payments.
             </p>
           </div>
 
@@ -210,7 +210,7 @@ export const LandingPage: React.FC = () => {
                 Engineered with Zero Compromises
               </h3>
               <p className="mt-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                Rather than treating security as an afterthought, PayFlow implements fintech industry benchmarks from day one.
+                Rather than treating security as an afterthought, FlexiPay implements fintech industry benchmarks from day one.
               </p>
 
               <div className="mt-6 space-y-3.5">
@@ -281,7 +281,7 @@ export const LandingPage: React.FC = () => {
               Does this project process real money?
             </h4>
             <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              No. PayFlow is an educational sandbox demonstrating payment gateway architectures, simulated UPI switches, tokenized card vaulting, and ledger transaction patterns. It never connects to real bank accounts or processes real currency.
+              No. FlexiPay is an educational sandbox demonstrating payment gateway architectures, simulated UPI switches, tokenized card vaulting, and ledger transaction patterns. It never connects to real bank accounts or processes real currency.
             </p>
           </div>
 

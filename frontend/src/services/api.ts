@@ -12,7 +12,7 @@ export const api = axios.create({
 // Interceptor to inject JWT Access Token
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('payflow_access_token');
+    const token = localStorage.getItem('flexipay_access_token') || localStorage.getItem('payflow_access_token');
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -26,9 +26,11 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // If unauthorized and not on login page, clear token and optionally redirect
       const currentPath = window.location.pathname;
       if (currentPath !== '/login' && currentPath !== '/register' && !currentPath.startsWith('/pay/')) {
+        localStorage.removeItem('flexipay_access_token');
+        localStorage.removeItem('flexipay_refresh_token');
+        localStorage.removeItem('flexipay_user');
         localStorage.removeItem('payflow_access_token');
         localStorage.removeItem('payflow_refresh_token');
         localStorage.removeItem('payflow_user');

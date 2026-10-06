@@ -42,7 +42,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({
     // Generate text/json receipt payload
     const receiptData = `
 ========================================
-           PAYFLOW DIGITAL RECEIPT
+           FLEXIPAY DIGITAL RECEIPT
 ========================================
 Transaction ID: ${transaction.transaction_id}
 Status:         ${transaction.status}
@@ -50,7 +50,7 @@ Amount:         INR ${transaction.amount}
 Date:           ${new Date(transaction.created_at).toLocaleString()}
 
 Sender:         ${transaction.sender_name || 'External / Card'}
-Receiver:       ${transaction.receiver_name || 'PayFlow Settlement'}
+Receiver:       ${transaction.receiver_name || 'FlexiPay Settlement'}
 Payment Method: ${transaction.payment_method}
 Reference ID:   ${transaction.reference_id || 'N/A'}
 Description:    ${transaction.description}
@@ -87,12 +87,12 @@ Security: 256-bit Tokenized Sandbox Transfer
         <div ref={receiptRef} className="p-6 sm:p-8 space-y-6">
           {/* Brand Header */}
           <div className="text-center space-y-2">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-emerald-400 text-white flex items-center justify-center mx-auto shadow-md font-extrabold text-xl">
-              P
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-emerald-400 text-white flex items-center justify-center mx-auto shadow-md font-extrabold text-xl" aria-hidden="true">
+              F
             </div>
             <div>
-              <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">PayFlow</h2>
-              <p className="text-xs text-slate-400 font-medium">Digital Payment Confirmation</p>
+              <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">FlexiPay</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Digital Payment Confirmation</p>
             </div>
           </div>
 
@@ -162,7 +162,7 @@ Security: 256-bit Tokenized Sandbox Transfer
               </span>
             </div>
             <div className="p-1.5 bg-white rounded-lg shadow-xs">
-              <QRCodeSVG value={`payflow://verify?tx=${transaction.transaction_id}`} size={48} />
+              <QRCodeSVG value={`flexipay://verify?tx=${transaction.transaction_id}`} size={48} />
             </div>
           </div>
         </div>

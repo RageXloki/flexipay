@@ -57,10 +57,18 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode; requiredRole?: strin
 const AppRoutes: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
+      {/* Skip to Main Content Link for Keyboard & Screen Reader Users */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-indigo-600 focus:text-white focus:rounded-xl focus:shadow-2xl focus:text-xs focus:font-bold focus:ring-2 focus:ring-white"
+      >
+        Skip to main content
+      </a>
+
       <SandboxBanner />
       <Navbar />
 
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-hidden">
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<LandingPage />} />

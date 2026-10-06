@@ -120,13 +120,13 @@ export const UPIPage: React.FC = () => {
         {/* Personal Dynamic QR Card */}
         <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl text-center space-y-4">
           <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-            Personal PayFlow QR
+            Personal FlexiPay QR
           </span>
 
           {/* QR Container */}
           <div className="p-4 bg-white rounded-3xl shadow-md border border-slate-100 max-w-[220px] mx-auto">
             <QRCodeSVG
-              value={primaryUPI ? primaryUPI.qr_payload : `upi://pay?pa=demo@payflow&pn=${user?.full_name}`}
+              value={primaryUPI ? primaryUPI.qr_payload : `upi://pay?pa=demo@flexipay&pn=${user?.full_name}`}
               size={180}
               className="mx-auto"
             />
@@ -137,7 +137,7 @@ export const UPIPage: React.FC = () => {
               {user?.full_name}
             </h3>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-xs font-mono font-bold text-indigo-700 dark:text-indigo-300">
-              <span>{primaryUPI?.upi_id || 'user@payflow'}</span>
+              <span>{primaryUPI?.upi_id || 'user@flexipay'}</span>
               <button onClick={handleCopyUPI} title="Copy UPI ID">
                 {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-slate-400 hover:text-indigo-600" />}
               </button>
@@ -145,7 +145,7 @@ export const UPIPage: React.FC = () => {
           </div>
 
           <p className="text-[11px] text-slate-500 max-w-xs mx-auto">
-            Anyone can scan this sandbox QR code to transfer test money directly to your PayFlow account.
+            Anyone can scan this sandbox QR code to transfer test money directly to your FlexiPay account.
           </p>
         </div>
 
@@ -168,7 +168,7 @@ export const UPIPage: React.FC = () => {
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-mono focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
                   />
                   <span className="absolute right-3 top-2.5 text-xs text-slate-400 font-mono">
-                    @payflow
+                    @flexipay
                   </span>
                 </div>
                 <button

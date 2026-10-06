@@ -283,7 +283,7 @@ class UserLookupView(APIView):
                 "full_name": u.full_name,
                 "email": u.email,
                 "phone_number": masked_phone,
-                "upi_id": upi.upi_id if upi else f"{u.email.split('@')[0]}@payflow",
+                "upi_id": upi.upi_id if upi else f"{u.email.split('@')[0]}@flexipay",
                 "role": u.role,
             })
 

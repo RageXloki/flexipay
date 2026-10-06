@@ -21,14 +21,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(() => {
-    const saved = localStorage.getItem('payflow_user');
+    const saved = localStorage.getItem('flexipay_user') || localStorage.getItem('payflow_user');
     return saved ? JSON.parse(saved) : null;
   });
   const [profile, setProfile] = useState<Profile | null>(null);
   const [wallet, setWallet] = useState<Wallet | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const savedTheme = localStorage.getItem('payflow_theme');
+    const savedTheme = localStorage.getItem('flexipay_theme') || localStorage.getItem('payflow_theme');
     if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
@@ -37,10 +37,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
+      root.style.colorScheme = 'dark';
     } else {
       root.classList.remove('dark');
+      root.style.colorScheme = 'light';
     }
-    localStorage.setItem('payflow_theme', theme);
+    localStorage.setItem('flexipay_theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -48,7 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const refreshUserData = async () => {
-    const token = localStorage.getItem('payflow_access_token');
+    const token = localStorage.getItem('flexipay_access_token') || localStorage.getItem('payflow_access_token');
     if (!token) {
       setUser(null);
       setProfile(null);
@@ -65,7 +67,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (profileRes.data?.user) {
         setUser(profileRes.data.user);
-        localStorage.setItem('payflow_user', JSON.stringify(profileRes.data.user));
+        localStorage.setItem('flexipay_user', JSON.stringify(profileRes.data.user));
       }
       if (profileRes.data?.profile) {
         setProfile(profileRes.data.profile);
@@ -90,10 +92,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return res.data;
     }
     if (res.data?.tokens) {
+      localStorage.setItem('flexipay_access_token', res.data.tokens.access);
+      localStorage.setItem('flexipay_refresh_token', res.data.tokens.refresh);
+      // Compatibility
       localStorage.setItem('payflow_access_token', res.data.tokens.access);
       localStorage.setItem('payflow_refresh_token', res.data.tokens.refresh);
+
       setUser(res.data.user);
-      localStorage.setItem('payflow_user', JSON.stringify(res.data.user));
+      localStorage.setItem('flexipay_user', JSON.stringify(res.data.user));
       await refreshUserData();
     }
     return res.data;
@@ -101,19 +107,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const demoLogin = async (role: UserRole) => {
     setIsLoading(true);
-    let email = 'user@payflow.local';
+    let email = 'user@flexipay.local';
     let password = 'DemoUser@123';
 
     if (role === 'MERCHANT') {
-      email = 'merchant@payflow.local';
+      email = 'merchant@flexipay.local';
       password = 'DemoMerchant@123';
     } else if (role === 'ADMIN') {
-      email = 'admin@payflow.local';
+      email = 'admin@flexipay.local';
       password = 'DemoAdmin@123';
     }
 
     try {
-      await login(email, password, '123456');
+      // Try with flexipay email, fallback to payflow if seeded under old alias
+      try {
+        await login(email, password, '123456');
+      } catch (e) {
+        const fallbackEmail = email.replace('@flexipay.local', '@payflow.local');
+        await login(fallbackEmail, password, '123456');
+      }
     } catch (err) {
       console.error('Demo login error:', err);
     } finally {
@@ -124,19 +136,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (data: any) => {
     const res = await api.post('/auth/register/', data);
     if (res.data?.tokens) {
+      localStorage.setItem('flexipay_access_token', res.data.tokens.access);
+      localStorage.setItem('flexipay_refresh_token', res.data.tokens.refresh);
       localStorage.setItem('payflow_access_token', res.data.tokens.access);
       localStorage.setItem('payflow_refresh_token', res.data.tokens.refresh);
+
       setUser(res.data.user);
-      localStorage.setItem('payflow_user', JSON.stringify(res.data.user));
+      localStorage.setItem('flexipay_user', JSON.stringify(res.data.user));
       await refreshUserData();
     }
   };
 
   const logout = () => {
-    const refresh = localStorage.getItem('payflow_refresh_token');
+    const refresh = localStorage.getItem('flexipay_refresh_token') || localStorage.getItem('payflow_refresh_token');
     if (refresh) {
       api.post('/auth/logout/', { refresh }).catch(() => {});
     }
+    localStorage.removeItem('flexipay_access_token');
+    localStorage.removeItem('flexipay_refresh_token');
+    localStorage.removeItem('flexipay_user');
     localStorage.removeItem('payflow_access_token');
     localStorage.removeItem('payflow_refresh_token');
     localStorage.removeItem('payflow_user');

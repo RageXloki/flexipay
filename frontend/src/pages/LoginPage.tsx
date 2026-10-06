@@ -55,10 +55,10 @@ export const LoginPage: React.FC = () => {
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2 mb-4 group">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-emerald-400 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-              P
+              F
             </div>
             <span className="font-extrabold text-2xl tracking-tight text-slate-900 dark:text-white">
-              PayFlow
+              FlexiPay
             </span>
           </Link>
           <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
@@ -125,7 +125,7 @@ export const LoginPage: React.FC = () => {
                       required
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
-                      placeholder="user@payflow.local or +919876543210"
+                      placeholder="user@flexipay.local or +919876543210"
                       className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-hidden transition-colors"
                     />
                     <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />

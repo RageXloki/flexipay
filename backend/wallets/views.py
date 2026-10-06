@@ -114,7 +114,7 @@ class AddMoneyView(APIView):
             Notification.objects.create(
                 user=request.user,
                 title="Wallet Credited",
-                message=f"₹{amount} successfully added to your PayFlow wallet.",
+                message=f"₹{amount} successfully added to your FlexiPay wallet.",
                 notification_type='PAYMENT_RECEIVED',
                 reference_id=txn.transaction_id
             )

@@ -74,7 +74,7 @@ export const PublicCheckoutPage: React.FC = () => {
         amount,
         payment_method: method,
         customer_name: customerName || 'Guest Customer',
-        customer_email: customerEmail || 'guest@payflow.local',
+        customer_email: customerEmail || 'guest@flexipay.local',
       });
 
       if (res.data?.status === 'success') {
@@ -115,7 +115,7 @@ export const PublicCheckoutPage: React.FC = () => {
           <h2 className="text-lg font-bold text-slate-900 dark:text-white">Unable to Load Checkout</h2>
           <p className="text-xs text-slate-500 dark:text-slate-400">{error || 'Invalid payment link'}</p>
           <Link to="/" className="inline-block text-xs font-semibold text-indigo-600 hover:underline">
-            Go to PayFlow Home
+            Go to FlexiPay Home
           </Link>
         </div>
       </div>
@@ -134,7 +134,7 @@ export const PublicCheckoutPage: React.FC = () => {
             {merchant?.business_name || 'Verified Merchant'}
           </h1>
           <span className="text-xs text-slate-400 block font-medium">
-            Category: {merchant?.business_category || 'E-Commerce'} • PayFlow Hosted Checkout
+            Category: {merchant?.business_category || 'E-Commerce'} • FlexiPay Hosted Checkout
           </span>
         </div>
 
@@ -275,7 +275,7 @@ export const PublicCheckoutPage: React.FC = () => {
                         className="text-indigo-600"
                       />
                       <Wallet className="w-4 h-4 text-amber-500" />
-                      <span className="text-xs">PayFlow Wallet (Bal: ₹{wallet?.balance || '0.00'})</span>
+                      <span className="text-xs">FlexiPay Wallet (Bal: ₹{wallet?.balance || '0.00'})</span>
                     </div>
                   </label>
                 )}

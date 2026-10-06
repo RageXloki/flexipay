@@ -41,23 +41,23 @@ export const ScanQRPage: React.FC = () => {
   const demoQRPresets = [
     {
       title: 'Elena (Apex Tech Gear Store)',
-      payload: 'upi://pay?pa=apexgear@payflow&pn=Apex%20Tech%20Gear&am=3499.00&cu=INR',
+      payload: 'upi://pay?pa=apexgear@flexipay&pn=Apex%20Tech%20Gear&am=3499.00&cu=INR',
       amount: '3499.00',
-      recipient: 'apexgear@payflow',
+      recipient: 'apexgear@flexipay',
       name: 'Apex Tech Gear',
     },
     {
       title: 'Priya Sharma (Personal UPI)',
-      payload: 'upi://pay?pa=priya@payflow&pn=Priya%20Sharma&am=450.00&cu=INR',
+      payload: 'upi://pay?pa=priya@flexipay&pn=Priya%20Sharma&am=450.00&cu=INR',
       amount: '450.00',
-      recipient: 'priya@payflow',
+      recipient: 'priya@flexipay',
       name: 'Priya Sharma',
     },
     {
       title: 'Alex Morgan (Demo User QR)',
-      payload: 'upi://pay?pa=alex@payflow&pn=Alex%20Morgan&cu=INR',
+      payload: 'upi://pay?pa=alex@flexipay&pn=Alex%20Morgan&cu=INR',
       amount: '',
-      recipient: 'alex@payflow',
+      recipient: 'alex@flexipay',
       name: 'Alex Morgan',
     },
   ];
@@ -177,7 +177,7 @@ export const ScanQRPage: React.FC = () => {
           Scan & Pay
         </h1>
         <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-          Scan any standard UPI QR code or PayFlow merchant barcode to initiate checkout
+          Scan any standard UPI QR code or FlexiPay merchant barcode to initiate checkout
         </p>
       </div>
 
@@ -299,7 +299,7 @@ export const ScanQRPage: React.FC = () => {
                 />
               </div>
               <p className="text-[11px] text-slate-400 mt-1.5">
-                Funding via PayFlow Wallet (Available: ₹{wallet?.balance || '0.00'})
+                Funding via FlexiPay Wallet (Available: ₹{wallet?.balance || '0.00'})
               </p>
             </div>
 

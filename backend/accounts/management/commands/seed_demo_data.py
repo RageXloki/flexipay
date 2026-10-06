@@ -13,7 +13,7 @@ class Command(BaseCommand):
     help = 'Seeds realistic sandbox demo data for PayFlow (User, Merchant, Admin, Transactions, Cards, UPI)'
 
     def handle(self, *args, **options):
-        self.stdout.write("Seeding PayFlow sandbox demo data...")
+        self.stdout.write("Seeding FlexiPay sandbox demo data...")
 
         # 1. Clean existing test records if re-seeding
         Transaction.objects.all().delete()
@@ -31,7 +31,7 @@ class Command(BaseCommand):
 
         # 2. Create Demo User
         demo_user = User.objects.create_user(
-            email='user@payflow.local',
+            email='user@flexipay.local',
             phone_number='+919876543210',
             full_name='Alex Morgan',
             password='DemoUser@123',
@@ -54,7 +54,7 @@ class Command(BaseCommand):
 
         # 3. Create Demo Merchant
         demo_merchant = User.objects.create_user(
-            email='merchant@payflow.local',
+            email='merchant@flexipay.local',
             phone_number='+919876543211',
             full_name='Elena Rostova',
             password='DemoMerchant@123',
@@ -85,7 +85,7 @@ class Command(BaseCommand):
 
         # 4. Create Demo Admin
         demo_admin = User.objects.create_superuser(
-            email='admin@payflow.local',
+            email='admin@flexipay.local',
             phone_number='+919876543212',
             full_name='Admin Supervisor',
             password='DemoAdmin@123',
@@ -106,7 +106,7 @@ class Command(BaseCommand):
 
         # 5. Create Another User for P2P interactions
         peer_user = User.objects.create_user(
-            email='priya@payflow.local',
+            email='priya@flexipay.local',
             phone_number='+919876543219',
             full_name='Priya Sharma',
             password='PriyaUser@123',
@@ -116,10 +116,10 @@ class Command(BaseCommand):
         Profile.objects.create(user=peer_user, bio='Software Engineer', city='Hyderabad')
         peer_wallet = Wallet.objects.create(user=peer_user, balance=Decimal('12000.00'), currency='INR')
 
-        # 6. UPI Accounts
-        UPIAccount.objects.create(user=demo_user, upi_id='alex@payflow', is_primary=True)
-        UPIAccount.objects.create(user=demo_merchant, upi_id='apexgear@payflow', is_primary=True)
-        UPIAccount.objects.create(user=peer_user, upi_id='priya@payflow', is_primary=True)
+        # 6. UPI Accounts (Primary FlexiPay + Aliases for convenience)
+        UPIAccount.objects.create(user=demo_user, upi_id='alex@flexipay', is_primary=True)
+        UPIAccount.objects.create(user=demo_merchant, upi_id='apexgear@flexipay', is_primary=True)
+        UPIAccount.objects.create(user=peer_user, upi_id='priya@flexipay', is_primary=True)
 
         # 7. Tokenized Saved Cards (Strictly last4 & token, NO CVV!)
         CardToken.objects.create(
@@ -318,7 +318,7 @@ class Command(BaseCommand):
         Notification.objects.create(
             user=demo_user,
             title='Payment Received',
-            message='₹15,000 added to your PayFlow wallet via test card.',
+            message='₹15,000 added to your FlexiPay wallet via test card.',
             notification_type='PAYMENT_RECEIVED',
             reference_id=t1.transaction_id,
             is_read=True
@@ -339,8 +339,8 @@ class Command(BaseCommand):
             is_read=False
         )
 
-        self.stdout.write(self.style.SUCCESS("PayFlow sandbox demo data seeded successfully!"))
+        self.stdout.write(self.style.SUCCESS("FlexiPay sandbox demo data seeded successfully!"))
         self.stdout.write("Demo accounts created:")
-        self.stdout.write("  User:     user@payflow.local     / DemoUser@123")
-        self.stdout.write("  Merchant: merchant@payflow.local / DemoMerchant@123")
-        self.stdout.write("  Admin:    admin@payflow.local    / DemoAdmin@123")
+        self.stdout.write("  User:     user@flexipay.local     / DemoUser@123")
+        self.stdout.write("  Merchant: merchant@flexipay.local / DemoMerchant@123")
+        self.stdout.write("  Admin:    admin@flexipay.local    / DemoAdmin@123")
