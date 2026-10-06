@@ -31,7 +31,13 @@ export const LoginPage: React.FC = () => {
       const redirectTo = (location.state as any)?.from?.pathname || '/dashboard';
       navigate(redirectTo);
     } catch (err: any) {
-      const msg = err.response?.data?.message || 'Login failed. Please verify credentials.';
+      let msg = err.response?.data?.message || 'Login failed. Please verify credentials.';
+      if (
+        msg.toLowerCase().includes('authentication credentials were not provided') ||
+        msg.toLowerCase().includes('not authenticated')
+      ) {
+        msg = 'Session expired or credentials missing. Please sign in below or use 1-Click Sandbox Demo Login.';
+      }
       setError(msg);
     } finally {
       setIsSubmitting(false);
@@ -44,7 +50,8 @@ export const LoginPage: React.FC = () => {
       await demoLogin(role);
       navigate('/dashboard');
     } catch (err: any) {
-      setError('Demo login failed. Ensure demo data is seeded.');
+      const msg = err.response?.data?.message || 'Demo login failed. Ensure demo data is seeded.';
+      setError(msg);
     }
   };
 

@@ -34,6 +34,7 @@ api.interceptors.response.use(
         localStorage.removeItem('payflow_access_token');
         localStorage.removeItem('payflow_refresh_token');
         localStorage.removeItem('payflow_user');
+        window.dispatchEvent(new CustomEvent('flexipay:unauthorized'));
       }
     }
     return Promise.reject(error);

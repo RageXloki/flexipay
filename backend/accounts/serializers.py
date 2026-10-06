@@ -79,6 +79,12 @@ class LoginSerializer(serializers.Serializer):
         user = None
         if '@' in identifier:
             user = User.objects.filter(email__iexact=identifier).first()
+            if not user and '@payflow.local' in identifier:
+                alt_email = identifier.replace('@payflow.local', '@flexipay.local')
+                user = User.objects.filter(email__iexact=alt_email).first()
+            elif not user and '@flexipay.local' in identifier:
+                alt_email = identifier.replace('@flexipay.local', '@payflow.local')
+                user = User.objects.filter(email__iexact=alt_email).first()
         else:
             clean_phone = re.sub(r'[\s\-\(\)]', '', identifier)
             user = User.objects.filter(phone_number=clean_phone).first()

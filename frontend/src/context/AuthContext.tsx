@@ -75,8 +75,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (walletRes.data?.wallet) {
         setWallet(walletRes.data.wallet);
       }
-    } catch (err) {
-      console.error('Failed to fetch user data:', err);
+    } catch (err: any) {
+      console.warn('Authentication token expired or user record refreshed:', err);
+      if (err.response?.status === 401) {
+        setUser(null);
+        setProfile(null);
+        setWallet(null);
+        localStorage.removeItem('flexipay_access_token');
+        localStorage.removeItem('flexipay_refresh_token');
+        localStorage.removeItem('flexipay_user');
+        localStorage.removeItem('payflow_access_token');
+        localStorage.removeItem('payflow_refresh_token');
+        localStorage.removeItem('payflow_user');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -84,6 +95,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     refreshUserData();
+
+    const handleUnauthorized = () => {
+      setUser(null);
+      setProfile(null);
+      setWallet(null);
+    };
+    window.addEventListener('flexipay:unauthorized', handleUnauthorized);
+    return () => window.removeEventListener('flexipay:unauthorized', handleUnauthorized);
   }, []);
 
   const login = async (identifier: string, password: string, otp?: string) => {
@@ -128,6 +147,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     } catch (err) {
       console.error('Demo login error:', err);
+      throw err;
     } finally {
       setIsLoading(false);
     }
